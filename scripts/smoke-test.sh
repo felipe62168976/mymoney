@@ -65,6 +65,7 @@ esperar "Usuário B não vê metas do A" 200 "$(http "$B" GET /api/metas)"
 [ "$(jq -r 'length' "$DIR/body")" = "0" ] && ok "Metas isoladas por usuário" || fail "Vazamento de metas"
 
 # --- Login/logout ---
+token "$A" # cada sessão tem o seu token CSRF; o TOKEN atual é do usuário B
 esperar "Logout do usuário A" 200 "$(http "$A" POST /api/auth/logout)"
 esperar "Sessão encerrada após logout" 401 "$(http "$A" GET /api/auth/me)"
 token "$A"
