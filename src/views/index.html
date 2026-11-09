@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyMoney · Controle financeiro pessoal</title>
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="site-nav">
+  <a class="logo" href="/"><span class="logo-icon" data-icon="wallet"></span>MyMoney</a>
+  <div class="nav-acoes">
+    <button class="btn btn-ghost" type="button" data-toggle-tema></button>
+    <a class="btn btn-ghost" href="/login">Entrar</a>
+    <a class="btn btn-primary" href="/cadastro">Criar conta</a>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div>
+      <h1>Saiba para onde vai cada real do seu dinheiro.</h1>
+      <p class="lead">O MyMoney organiza suas receitas, despesas e metas em um só lugar. Seus dados ficam salvos no seu computador, sem depender de nuvem ou serviços externos.</p>
+      <div class="cta">
+        <a class="btn btn-primary btn-lg" href="/cadastro">Criar conta</a>
+        <a class="btn btn-ghost btn-lg" href="/login">Já tenho conta</a>
+      </div>
+    </div>
+    <aside class="hero-card" aria-label="Resumo do painel">
+      <small>No seu painel, tudo é calculado a partir dos seus lançamentos:</small>
+      <div class="linha"><span>Saldo atual</span><strong>receitas − despesas</strong></div>
+      <div class="linha rec"><span>Receitas</span><strong>entradas do período</strong></div>
+      <div class="linha des"><span>Despesas</span><strong>saídas do período</strong></div>
+      <div class="linha"><span>Metas</span><strong>progresso automático</strong></div>
+    </aside>
+  </section>
+  <section class="recursos" id="recursos">
+    <h2>O que você pode fazer</h2>
+    <div class="recursos-grid">
+      <article class="recurso"><div class="ic" data-icon="up"></div><h3>Receitas e despesas</h3><p>Cadastre, edite e exclua lançamentos com categoria, data e forma de pagamento.</p></article>
+      <article class="recurso"><div class="ic" data-icon="list"></div><h3>Movimentações</h3><p>Filtre por período, categoria e tipo, ou pesquise pela descrição.</p></article>
+      <article class="recurso"><div class="ic" data-icon="target"></div><h3>Metas financeiras</h3><p>Defina objetivos com prazo e acompanhe o progresso em barras atualizadas.</p></article>
+      <article class="recurso"><div class="ic" data-icon="chart"></div><h3>Relatórios com gráficos</h3><p>Compare meses, veja gastos por categoria e acompanhe a evolução do saldo.</p></article>
+      <article class="recurso"><div class="ic" data-icon="shield"></div><h3>Privado e seguro</h3><p>Senhas protegidas com bcrypt e cada usuário vê somente os próprios dados.</p></article>
+      <article class="recurso"><div class="ic" data-icon="coins"></div><h3>100% local</h3><p>Funciona em localhost, com banco SQLite salvo na sua máquina.</p></article>
+    </div>
+  </section>
+</main>
+<footer class="site-foot">MyMoney · Controle financeiro pessoal</footer>
+<script src="/js/script.js" defer></script>
+</body>
+</html>

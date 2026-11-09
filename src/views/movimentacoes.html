@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Movimentações · MyMoney</title>
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body data-page="movimentacoes">
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="content">
+    <header class="page-head">
+      <div><h1>Movimentações</h1><p class="muted">Todas as receitas e despesas em um só lugar.</p></div>
+      <button class="btn btn-primary" id="btn-novo" type="button"><i data-icon="plus"></i><span>Nova movimentação</span></button>
+    </header>
+
+    <form class="card filters" id="filtros" autocomplete="off">
+      <label>De <input type="date" id="f-inicio"></label>
+      <label>Até <input type="date" id="f-fim"></label>
+      <label>Categoria <select id="f-categoria"><option value="">Todas as categorias</option></select></label>
+    <label>Tipo
+      <select id="f-tipo"><option value="">Todos</option><option value="receita">Receitas</option><option value="despesa">Despesas</option></select>
+    </label>
+      <label>Pesquisar descrição <input type="search" id="f-q" placeholder="Ex.: mercado" maxlength="100"></label>
+      <button class="btn btn-ghost" id="btn-limpar" type="button">Limpar filtros</button>
+    </form>
+
+    <section class="card">
+      <p class="resumo" id="resumo"></p>
+      <div class="table-wrap">
+        <table class="table" id="tabela" hidden>
+          <thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Forma</th><th>Tipo</th><th class="num">Valor</th><th class="acoes">Ações</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="vazio" hidden>Nenhum lançamento encontrado. Use o botão “Nova movimentação” para cadastrar o primeiro.</p>
+      <div class="paginacao">
+        <button class="btn btn-ghost" id="pag-ant" type="button">Anterior</button>
+        <span id="pag-info"></span>
+        <button class="btn btn-ghost" id="pag-prox" type="button">Próxima</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog id="modal">
+  <form class="dialog-body form" id="form-mov">
+    <header><h2 id="modal-titulo">Novo lançamento</h2><button class="icon-btn" type="button" data-fechar aria-label="Fechar" data-icon="x"></button></header>
+    <div class="field" id="row-tipo"><label for="m-tipo">Tipo</label>
+      <select id="m-tipo"><option value="despesa">Despesa</option><option value="receita">Receita</option></select></div>
+    <div class="field"><label for="m-descricao">Descrição</label><input id="m-descricao" maxlength="120" required></div>
+    <div class="field-row">
+      <div class="field"><label for="m-valor">Valor (R$)</label><input id="m-valor" inputmode="decimal" placeholder="0,00" required></div>
+      <div class="field"><label for="m-data">Data</label><input id="m-data" type="date" required></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label for="m-categoria">Categoria</label><select id="m-categoria" required></select></div>
+      <div class="field"><label for="m-forma" id="lbl-forma">Forma de pagamento</label><select id="m-forma" required></select></div>
+    </div>
+    <p class="form-erro" hidden></p>
+    <div class="dialog-acoes"><button class="btn btn-ghost" type="button" data-fechar>Cancelar</button><button class="btn btn-primary" type="submit">Salvar</button></div>
+  </form>
+</dialog>
+
+<script src="/js/script.js" defer></script>
+<script src="/js/financeiro.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Configurações · MyMoney</title>
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body data-page="configuracoes">
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="content">
+    <header class="page-head"><div><h1>Configurações</h1><p class="muted">Perfil, senha, aparência e categorias.</p></div></header>
+    <section class="config-grid">
+      <article class="card"><h2>Perfil</h2>
+        <form class="form" id="form-perfil">
+          <div class="field"><label for="p-nome">Nome completo</label><input id="p-nome" maxlength="100" required></div>
+          <div class="field"><label for="p-email">E-mail</label><input id="p-email" readonly></div>
+          <p class="form-erro" hidden></p>
+          <button class="btn btn-primary" type="submit">Salvar perfil</button>
+        </form></article>
+      <article class="card"><h2>Alterar senha</h2>
+        <form class="form" id="form-senha">
+          <div class="field"><label for="s-atual">Senha atual</label><input id="s-atual" name="atual" type="password" autocomplete="current-password" required></div>
+          <div class="field"><label for="s-nova">Nova senha (mínimo 8 caracteres)</label><input id="s-nova" name="nova" type="password" autocomplete="new-password" minlength="8" required></div>
+          <div class="field"><label for="s-conf">Confirmar nova senha</label><input id="s-conf" name="confirmacao" type="password" autocomplete="new-password" required></div>
+          <p class="form-erro" hidden></p>
+          <button class="btn btn-primary" type="submit">Alterar senha</button>
+        </form></article>
+      <article class="card"><h2>Aparência</h2>
+        <p class="muted">Escolha entre o tema claro e o escuro. A preferência fica salva neste navegador.</p>
+        <button class="btn btn-ghost" type="button" data-toggle-tema></button></article>
+    </section>
+    <section class="card"><h2>Categorias</h2>
+      <form class="form" id="form-categoria">
+        <div class="field-row">
+          <div class="field"><label for="c-nome">Nova categoria</label><input id="c-nome" name="nome" maxlength="40" required placeholder="Ex.: Pets"></div>
+          <div class="field"><label for="c-tipo">Tipo</label><select id="c-tipo" name="tipo"><option value="despesa">Despesa</option><option value="receita">Receita</option></select></div>
+        </div>
+        <p class="form-erro" hidden></p>
+        <div><button class="btn btn-primary" type="submit">Adicionar categoria</button></div>
+      </form>
+      <div class="cat-listas">
+        <div><h3>Categorias de receita</h3><ul class="cat-lista" id="cat-receita"></ul></div>
+        <div><h3>Categorias de despesa</h3><ul class="cat-lista" id="cat-despesa"></ul></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="/js/script.js" defer></script>
+<script src="/js/configuracoes.js" defer></script>
+</body>
+</html>

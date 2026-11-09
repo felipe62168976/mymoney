@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrar · MyMoney</title>
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="auth-page">
+  <section class="auth-card">
+    <a class="logo" href="/"><span class="logo-icon" data-icon="wallet"></span>MyMoney</a>
+    <h1>Entrar na sua conta</h1>
+    <form class="form" id="form-login">
+      <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" required autofocus></div>
+      <div class="field"><label for="senha">Senha</label>
+        <div class="senha-wrap"><input id="senha" name="senha" type="password" autocomplete="current-password" data-senha required>
+        <button class="icon-btn" type="button" data-toggle-senha aria-label="Mostrar ou ocultar senha" aria-pressed="false"></button></div></div>
+      <p class="form-erro" hidden></p>
+      <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+    </form>
+    <p class="auth-rodape">Ainda não tem conta? <a href="/cadastro">Criar conta</a></p>
+  </section>
+</main>
+<script src="/js/script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relatórios · MyMoney</title>
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body data-page="relatorios">
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="content">
+    <header class="page-head"><div><h1>Relatórios</h1><p class="muted">Analise sua evolução financeira por período.</p></div></header>
+
+    <form class="card relatorio-form" id="form-periodo">
+      <label>Período rápido
+        <select id="r-preset"><option value="">Personalizado</option><option value="mes">Este mês</option><option value="6m" selected>Últimos 6 meses</option><option value="ano">Este ano</option></select></label>
+      <label>De <input type="date" id="r-inicio" required></label>
+      <label>Até <input type="date" id="r-fim" required></label>
+      <button class="btn btn-primary" type="submit">Gerar relatório</button>
+    </form>
+
+    <section class="indicadores">
+      <article class="card indicador receita"><div class="rotulo"><i data-icon="up"></i>Receitas no período</div><div class="valor" id="t-receitas">R$ 0,00</div></article>
+      <article class="card indicador despesa"><div class="rotulo"><i data-icon="down"></i>Despesas no período</div><div class="valor" id="t-despesas">R$ 0,00</div></article>
+      <article class="card indicador"><div class="rotulo"><i data-icon="wallet"></i>Resultado do período</div><div class="valor" id="t-saldo">R$ 0,00</div></article>
+    </section>
+
+    <section class="graficos">
+      <article class="card"><h2>Receitas por período</h2><div class="grafico"><canvas id="g-receitas"></canvas></div><p class="empty" id="g-receitas-vazio" hidden>Sem receitas no período.</p></article>
+      <article class="card"><h2>Despesas por período</h2><div class="grafico"><canvas id="g-despesas"></canvas></div><p class="empty" id="g-despesas-vazio" hidden>Sem despesas no período.</p></article>
+      <article class="card"><h2>Gastos por categoria</h2><div class="grafico"><canvas id="g-categorias"></canvas></div><p class="empty" id="g-categorias-vazio" hidden>Sem despesas no período.</p></article>
+      <article class="card"><h2>Comparação mensal</h2><div class="grafico"><canvas id="g-comparacao"></canvas></div><p class="empty" id="g-comparacao-vazio" hidden>Sem movimentações no período.</p></article>
+      <article class="card"><h2>Evolução do saldo</h2><div class="grafico"><canvas id="g-saldo"></canvas></div><p class="empty" id="g-saldo-vazio" hidden>Sem movimentações no período.</p></article>
+    </section>
+
+    <section class="graficos">
+      <article class="card"><h2>Detalhe por mês</h2><div class="table-wrap"><table class="table">
+        <thead><tr><th>Mês</th><th class="num">Receitas</th><th class="num">Despesas</th><th class="num">Resultado</th><th class="num">Saldo acumulado</th></tr></thead>
+        <tbody id="mes-tabela"></tbody></table></div></article>
+      <article class="card"><h2>Despesas por categoria</h2><div class="table-wrap"><table class="table">
+        <thead><tr><th>Categoria</th><th class="num">Total</th><th class="num">%</th></tr></thead>
+        <tbody id="cat-tabela"></tbody></table></div></article>
+    </section>
+  </main>
+</div>
+<script src="/libs/chart.umd.js" defer></script>
+<script src="/js/script.js" defer></script>
+<script src="/js/graficos.js" defer></script>
+<script src="/js/relatorios.js" defer></script>
+</body>
+</html>

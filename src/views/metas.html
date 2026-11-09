@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metas financeiras · MyMoney</title>
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body data-page="metas">
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="content">
+    <header class="page-head">
+      <div><h1>Metas financeiras</h1><p class="muted">Defina objetivos e acompanhe o progresso.</p></div>
+      <button class="btn btn-primary" id="btn-novo" type="button"><i data-icon="plus"></i><span>Nova meta</span></button>
+    </header>
+    <section class="metas-grid" id="lista"></section>
+    <p class="card empty" id="vazio" hidden>Você ainda não tem metas. Crie a primeira com o botão “Nova meta”.</p>
+  </main>
+</div>
+
+<dialog id="modal">
+  <form class="dialog-body form" id="form-meta">
+    <header><h2 id="modal-titulo">Nova meta</h2><button class="icon-btn" type="button" data-fechar aria-label="Fechar" data-icon="x"></button></header>
+    <div class="field"><label for="g-nome">Nome da meta</label><input id="g-nome" maxlength="80" required placeholder="Ex.: Reserva de emergência"></div>
+    <div class="field-row">
+      <div class="field"><label for="g-desejado">Valor desejado (R$)</label><input id="g-desejado" inputmode="decimal" placeholder="0,00" required></div>
+      <div class="field"><label for="g-acumulado">Valor acumulado (R$)</label><input id="g-acumulado" inputmode="decimal" placeholder="0,00"></div>
+    </div>
+    <div class="field"><label for="g-data">Data limite</label><input id="g-data" type="date" required></div>
+    <p class="form-erro" hidden></p>
+    <div class="dialog-acoes"><button class="btn btn-ghost" type="button" data-fechar>Cancelar</button><button class="btn btn-primary" type="submit">Salvar meta</button></div>
+  </form>
+</dialog>
+
+<dialog id="modal-dep">
+  <form class="dialog-body form" id="form-dep">
+    <header><h2 id="dep-titulo">Adicionar valor</h2><button class="icon-btn" type="button" data-fechar aria-label="Fechar" data-icon="x"></button></header>
+    <div class="field"><label for="d-valor">Valor a adicionar (R$)</label><input id="d-valor" inputmode="decimal" placeholder="0,00" required></div>
+    <p class="form-erro" hidden></p>
+    <div class="dialog-acoes"><button class="btn btn-ghost" type="button" data-fechar>Cancelar</button><button class="btn btn-primary" type="submit">Adicionar</button></div>
+  </form>
+</dialog>
+
+<script src="/js/script.js" defer></script>
+<script src="/js/metas.js" defer></script>
+</body>
+</html>
