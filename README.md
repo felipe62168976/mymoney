@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MyMoney — Controle financeiro pessoal
 
 Sistema web 100% local: Node.js + Express + SQLite + Chart.js. Único requisito: **Node.js 20 ou superior**.
@@ -40,3 +41,6 @@ scripts/copy-libs.js src/routes · src/controllers · src/middleware · src/view
 
 - Valores são exibidos em R$ (pt-BR) e datas em dd/mm/aaaa; no banco as datas ficam em ISO (aaaa-mm-dd).
 - Faça backup copiando `database/mymoney.db`.
+=======
+# mymoney
+>>>>>>> cb81c0f483c9e1a967685726336c1b7f40dc104c
