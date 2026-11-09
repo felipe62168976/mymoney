@@ -20,14 +20,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [20, 22, 24]
+        node: [22, 24]
 
     steps:
       - name: Baixar código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Configurar Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
 
@@ -72,7 +72,10 @@ jobs:
           SESSION_SECRET: ci-secret-nao-usar-em-producao
 
       - name: Teste de fumaça (cadastro, login, lançamentos, isolamento e CSRF)
-        run: bash scripts/smoke-test.sh
+        run: |
+          ls -la scripts
+          sed -i 's/\r$//' scripts/smoke-test.sh
+          bash scripts/smoke-test.sh
         env:
           BASE_URL: http://localhost:3000
 
@@ -85,8 +88,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - run: if [ -f package-lock.json ]; then npm ci --ignore-scripts; else npm install --ignore-scripts; fi

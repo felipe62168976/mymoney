@@ -9,7 +9,7 @@
     "init-db": "node database/init.js",
     "postinstall": "node scripts/copy-libs.js"
   },
-  "engines": { "node": ">=20" },
+  "engines": { "node": ">=22" },
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^6.0.0",
