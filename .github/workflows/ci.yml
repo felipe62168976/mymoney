@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22, 24]
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Instalar dependências
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+      - name: Verificar sintaxe dos arquivos JavaScript
+        run: |
+          find server.js database scripts src -name '*.js' -not -path '*/libs/*' -print0 \
+            | xargs -0 -n1 node --check
+
+      - name: Verificar se o Chart.js foi copiado localmente (sem CDN)
+        run: test -s src/public/libs/chart.umd.js
+
+      - name: Garantir que não há CDN nas páginas
+        run: |
+          if grep -rEn 'https?://(cdn|unpkg|cdnjs|fonts\.googleapis)' src/views; then
+            echo "Foram encontradas referências a CDN em src/views" >&2
+            exit 1
+          fi
+
+      - name: Inicializar banco de dados
+        run: npm run init-db
+        env:
+          DB_PATH: ${{ runner.temp }}/mymoney-ci.db
+
+      - name: Iniciar servidor
+        run: |
+          rm -f "$RUNNER_TEMP/mymoney-ci.db"*
+          nohup npm start > "$RUNNER_TEMP/server.log" 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fs http://localhost:3000/ > /dev/null; then echo "Servidor pronto."; exit 0; fi
+            sleep 1
+          done
+          echo "O servidor não iniciou a tempo." >&2
+          cat "$RUNNER_TEMP/server.log" >&2
+          exit 1
+        env:
+          PORT: 3000
+          DB_PATH: ${{ runner.temp }}/mymoney-ci.db
+          SESSION_SECRET: ci-secret-nao-usar-em-producao
+
+      - name: Teste de fumaça (cadastro, login, lançamentos, isolamento e CSRF)
+        run: bash scripts/smoke-test.sh
+        env:
+          BASE_URL: http://localhost:3000
+
+      - name: Exibir log do servidor em caso de falha
+        if: failure()
+        run: cat "$RUNNER_TEMP/server.log" || true
+
+  audit:
+    name: Auditoria de dependências
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: if [ -f package-lock.json ]; then npm ci --ignore-scripts; else npm install --ignore-scripts; fi
+      - name: npm audit (vulnerabilidades altas ou críticas)
+        run: npm audit --audit-level=high
